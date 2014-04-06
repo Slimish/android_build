@@ -85,7 +85,7 @@ def get_device_url(git_data):
                     break
 
     if device_url:
-        return device_url
+        return "{}/{}".format(android_team, device_url)
     raise Exception("{} not found in {} Github, exiting "
                     "roomservice".format(device, android_team))
 
@@ -177,7 +177,7 @@ def write_to_manifest(manifest):
 
     with open('/'.join([local_manifest_dir, "roomservice.xml"]), 'w') as f:
         f.write(raw_xml)
-    print("wrote the new roomservice manifest")
+    print("Written to local device manifests")
 
 
 def parse_device_from_manifest(device):
@@ -200,7 +200,7 @@ def parse_device_from_folder(device):
     elif len(search) == 1:
         location = search[0]
     else:
-        print("you device can't be found in device sources..")
+        print("Your device was not found. Attempting to retrieve device repository from thelegorom Github..")
         location = parse_device_from_manifest(device)
     return location
 
