@@ -61,12 +61,12 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^slim_") ; then
-       SLIM_BUILD=$(echo -n $1 | sed -e 's/^slim_//g')
+    if (echo -n $1 | grep -q -e "^lego_") ; then
+       LEGO_BUILD=$(echo -n $1 | sed -e 's/^lego_//g')
     else
-       SLIM_BUILD=
+       LEGO_BUILD=
     fi
-    export SLIM_BUILD
+    export LEGO_BUILD
 
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
         TARGET_PRODUCT=$1 \
@@ -463,7 +463,7 @@ function brunch()
 {
     breakfast $*
     if [ $? -eq 0 ]; then
-mka bacon
+mka lego
     else
 echo "No such item in brunch menu. Try 'breakfast'"
         return 1
@@ -488,7 +488,7 @@ function breakfast()
     CM_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/slim/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/lego/vendorsetup.sh 2> /dev/null`
         do
 echo "including $f"
             . $f
@@ -504,8 +504,8 @@ echo "z$target" | grep -q "-"
             # A buildtype was specified, assume a full device name
             lunch $target
         else
-            # This is probably just the SLIM model name
-            lunch slim_$target-userdebug
+            # This is probably just the LEGO model name
+            lunch lego_$target-userdebug
         fi
 fi
 return $?
@@ -552,7 +552,7 @@ function lunch()
     check_product $product
     if [ $? -ne 0 ]
     then
-        # if we can't find a product, try to grab it off the SlimRoms github
+        # if we can't find a product, try to grab it off the LegoRoms github
         T=$(gettop)
         pushd $T > /dev/null
         build/tools/roomservice.py $product
