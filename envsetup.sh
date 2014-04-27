@@ -139,7 +139,7 @@ function setpaths()
     case $ARCH in
         x86) toolchaindir=x86/i686-linux-android-$targetgccversion/bin
             ;;
-        arm) toolchaindir=arm/sm-arm-androideabi-4.9/bin
+        arm) toolchaindir=arm/sm-arm-androideabi-4.10/bin
             ;;
         mips) toolchaindir=mips/mipsel-linux-android-$targetgccversion/bin
             ;;
