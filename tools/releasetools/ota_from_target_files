@@ -486,10 +486,12 @@ def WriteFullOTAPackage(input_zip, output_zip):
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
   script.Print("")
-  script.Print("Format and Mount System, Mount Data...")
+  script.Print("Formating System...")
   script.FormatPartition("/system")
+  script.Print("Mounting System and Data...")
   script.Mount("/system")
   script.Mount("/data")
+  script.Print("Installing System Files...")
   script.UnpackPackageDir("system", "/system")
   script.UnpackPackageDir("data", "/data")
 
